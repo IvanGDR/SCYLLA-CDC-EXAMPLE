@@ -51,7 +51,7 @@ public class TestCDCConsumer {
                 // Print the change. See printChange()
                 // for more information on how to
                 // access its details.
-                printChange("what is this" + change);
+                printChange(change);
                 return CompletableFuture.completedFuture(null);
             };
             return changeConsumer;
