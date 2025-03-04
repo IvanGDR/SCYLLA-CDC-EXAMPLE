@@ -1,23 +1,24 @@
 package com.example;
 
-import com.google.common.io.BaseEncoding;
-import com.scylladb.cdc.lib.CDCConsumer;
-import com.scylladb.cdc.lib.RawChangeConsumerProvider;
-import com.scylladb.cdc.model.StreamId;
-import com.scylladb.cdc.model.TableName;
-import com.scylladb.cdc.model.worker.ChangeId;
-import com.scylladb.cdc.model.worker.ChangeSchema;
-import com.scylladb.cdc.model.worker.ChangeTime;
-import com.scylladb.cdc.model.worker.RawChange;
-import com.scylladb.cdc.model.worker.RawChangeConsumer;
-import com.scylladb.cdc.model.worker.cql.Cell;
-import sun.misc.Signal;
-
-import java.text.SimpleDateFormat;
+//import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
+
+//import com.google.common.io.BaseEncoding;
+import com.scylladb.cdc.lib.CDCConsumer;
+import com.scylladb.cdc.lib.RawChangeConsumerProvider;
+//import com.scylladb.cdc.model.StreamId;
+import com.scylladb.cdc.model.TableName;
+//import com.scylladb.cdc.model.worker.ChangeId;
+import com.scylladb.cdc.model.worker.ChangeSchema;
+//import com.scylladb.cdc.model.worker.ChangeTime;
+import com.scylladb.cdc.model.worker.RawChange;
+import com.scylladb.cdc.model.worker.RawChangeConsumer;
+import com.scylladb.cdc.model.worker.cql.Cell;
+
+import sun.misc.Signal;
 
 public class TestCDCConsumer {
 
@@ -50,7 +51,7 @@ public class TestCDCConsumer {
                 // Print the change. See printChange()
                 // for more information on how to
                 // access its details.
-                printChange(change);
+                printChange("what is this" + change);
                 return CompletableFuture.completedFuture(null);
             };
             return changeConsumer;
@@ -91,18 +92,8 @@ public class TestCDCConsumer {
         // The CDCConsumer is gracefully stopped after try-with-resources.
     }
 
-    private static void printChange(RawChange change) {
+    private static synchronized void printChange(RawChange change) {
         /*
-        // Define colum names
-        GetConfigValue colvalue = new GetConfigValue();
-        String sensor_id = colvalue.GetCol1();
-        String coordinate = colvalue.GetCol2();
-        String status = colvalue.GetCol3();
-        // Define Cell results
-        //Object cellValue_sensor_id;
-        //Object cellValue_coordinate;
-        //Object cellValue_status;
-        */
         // Get the ID of the change which contains stream_id and time.
         ChangeId changeId = change.getId();
         StreamId streamId = changeId.getStreamId();
@@ -110,8 +101,9 @@ public class TestCDCConsumer {
 
         // Get the operation type, for example: ROW_UPDATE, POST_IMAGE.
         RawChange.OperationType operationType = change.getOperationType();
-
+        
         prettyPrintChangeHeader(streamId, changeTime, operationType);
+        */
 
         // In each RawChange there is an information about the
         // change schema.
@@ -162,7 +154,7 @@ public class TestCDCConsumer {
     }
 
     // Some pretty printing helpers:
-
+    /*
     private static void prettyPrintChangeHeader(StreamId streamId, ChangeTime changeTime,
                                                 RawChange.OperationType operationType) {
         byte[] buf = new byte[16];
@@ -174,7 +166,7 @@ public class TestCDCConsumer {
         prettyPrintField("Operation type:", operationType.name());
         System.out.println("├────────────────────────────────────────────────────────┤");
     }
-
+    */
 
     private static void prettyPrintCell(String columnName, Object cellValue, int columnIndex) {
 
